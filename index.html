@@ -162,7 +162,7 @@
   <p class="mt-4 text-base sm:text-lg md:text-2xl">The Faceless Movement on Solana</p>
   <div class="mt-6 flex flex-col sm:flex-row gap-4">
     <a href="#about" class="px-6 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-200">Learn More</a>
-    <a href="https://x.com/i/communities/1954910049610182989" class="px-6 py-3 border border-white rounded-full font-semibold hover:bg-white hover:text-black">Join Community</a>
+    <a href="#community" class="px-6 py-3 border border-white rounded-full font-semibold hover:bg-white hover:text-black">Join Community</a>
   </div>
 </section>
 
@@ -175,22 +175,20 @@
   </p>
 </section>
 
-<!-- SHOWCASE (COIN VIDEO) -->
-<section id="showcase" class="relative flex flex-col items-center justify-center py-10 z-10 bg-black/80 overflow-hidden">
-  <h2 class="text-4xl font-bold mb-6 text-center">THE NOFACE COIN</h2>
-  
-  <video autoplay loop muted playsinline
-    class="w-64 md:w-96 mx-auto rounded-2xl shadow-[0_0_25px_#00ff00]/50"
-    controls
-  >
-    <source src="noface_coin.webm" type="video/webm" />
-    Your browser does not support the video tag.
-  </video>
-  
-  <p class="mt-4 text-gray-300 text-center max-w-md">
-    Witness the endless flip — a coin that never lands, symbolizing the infinite energy of the faceless Solana movement.
-  </p>
-</section>
+  <!-- SHOWCASE (COIN VIDEO) -->
+  <section id="showcase" class="relative flex flex-col items-center justify-center py-10 z-10 bg-black/80 overflow-hidden">
+    <h2 class="text-4xl font-bold mb-8 text-center glitch" data-text="THE NOFACE COIN">THE NOFACE COIN</h2>
+    <div class="relative">
+      <video autoplay loop muted playsinline
+        class="w-full max-w-md md:max-w-2xl rounded-2xl shadow-[0_0_25px_#00ff00]/50 glitch-video">
+        <source src="noface_coin.webm" type="video/webm" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <p class="mt-6 text-gray-300 text-center max-w-lg">
+      Witness the endless flip — a coin that never lands, symbolizing the infinite energy of the faceless Solana movement.
+    </p>
+  </section>
 
   <!-- FEATURES -->
   <section class="relative py-24 px-6 z-10 bg-gray-900/70 rounded-xl shadow-lg">
@@ -214,6 +212,51 @@
     <p class="text-gray-600 text-sm sm:text-base">© 2025 No Face Solana</p>
   </footer>
 
-</script>
+  <!-- MATRIX SCRIPT -->
+  <script>
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    const letters = "アァイィウヴエェオカガキギクグケゲコゴサザシジスズABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const matrix = letters.split("");
+    const fontSize = 13;
+    const columns = Math.floor(window.innerWidth / fontSize);
+    const drops = Array(columns).fill(1);
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#0F0";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = matrix[Math.floor(Math.random() * matrix.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+
+      if (window.innerWidth < 600)
+        setTimeout(() => requestAnimationFrame(draw), 50);
+      else
+        requestAnimationFrame(draw);
+    }
+    draw();
+
+    const scrollBar = document.getElementById("scroll-bar");
+    window.addEventListener("scroll", () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercent = (scrollTop / scrollHeight) * 100;
+      scrollBar.style.height = scrollPercent + "%";
+    });
+  </script>
 </body>
 </html>
