@@ -147,70 +147,83 @@
   <div id="scroll-progress"><div id="scroll-bar"></div></div>
 
 <!-- NOFACE IMAGE -->
-<section class="relative flex flex-col items-center justify-center pt-16 pb-8 z-10">
+<section class="relative flex flex-col items-center justify-center py-12 sm:py-16 md:py-20 z-10">
   <picture>
     <source srcset="https://i.ibb.co/zVQ1hkzR/noface-coin.webp" type="image/webp">
-    <img src="https://i.ibb.co/zVQ1hkzR/noface-coin.webp" alt="No Face Solana"
-      class="w-64 md:w-96 mx-auto rounded-2xl shadow-[0_0_25px_#00ff00]/50"
-      loading="lazy" decoding="async">
+    <img 
+      src="https://i.ibb.co/zVQ1hkzR/noface-coin.webp" 
+      alt="No Face Solana"
+      class="w-48 sm:w-64 md:w-80 lg:w-96 mx-auto rounded-2xl shadow-[0_0_25px_#00ff00]/50"
+      loading="lazy" 
+      decoding="async">
   </picture>
 </section>
 
 <!-- HERO -->
-<section class="relative flex flex-col items-center justify-center text-center z-10 px-4 pt-8 pb-8">
-  <h1 class="text-5xl md:text-7xl font-bold">NO FACE SOLANA</h1>
-  <p class="mt-4 text-base sm:text-lg md:text-2xl">The Faceless Movement on Solana</p>
+<section class="relative flex flex-col items-center justify-center text-center z-10 px-4 py-12 sm:py-16 md:py-20">
+  <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight drop-shadow-[0_0_10px_#00ff00]">
+    NO FACE SOLANA
+  </h1>
+  <p class="mt-4 text-base sm:text-lg md:text-2xl text-gray-300 max-w-xl mx-auto">
+    The Faceless Movement on Solana
+  </p>
   <div class="mt-6 flex flex-col sm:flex-row gap-4">
-    <a href="#about" class="px-6 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-200">Learn More</a>
-    <a href="#community" class="px-6 py-3 border border-white rounded-full font-semibold hover:bg-white hover:text-black">Join Community</a>
+    <a href="#about" class="px-6 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-200 transition">
+      Learn More
+    </a>
+    <a href="#community" class="px-6 py-3 border border-white rounded-full font-semibold hover:bg-white hover:text-black transition">
+      Join Community
+    </a>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section id="about" class="relative py-8 px-6 max-w-4xl mx-auto text-center z-10 bg-black/70 rounded-xl shadow-lg">
-  <h2 class="text-4xl font-bold mb-4">About the Movement</h2>
-  <p class="text-lg text-gray-300 leading-relaxed">
+<section id="about" class="relative py-12 sm:py-16 md:py-20 px-6 max-w-4xl mx-auto text-center z-10 bg-black/70 rounded-xl shadow-lg">
+  <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-white">About the Movement</h2>
+  <p class="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed">
     In a world of faces, we remain anonymous. <br/>
     A faceless digital movement built on Solana — dedicated to privacy, speed, and community.
   </p>
 </section>
 
-  <!-- SHOWCASE (COIN VIDEO) -->
-  <section id="showcase" class="relative flex flex-col items-center justify-center py-10 z-10 bg-black/80 overflow-hidden">
-    <h2 class="text-4xl font-bold mb-8 text-center glitch" data-text="THE NOFACE COIN">THE NOFACE COIN</h2>
-    <div class="relative">
-      <video autoplay loop muted playsinline
-        class="w-full max-w-md md:max-w-2xl rounded-2xl shadow-[0_0_25px_#00ff00]/50 glitch-video">
-        <source src="noface_coin.webm" type="video/webm" />
-        Your browser does not support the video tag.
-      </video>
-    </div>
-    <p class="mt-6 text-gray-300 text-center max-w-lg">
-      As this coin flips — so is the traditional system that we have! This coin stands with Kiko Barzaga — Fighting corruption and ending the reign of power-hungry politicians.
-    </p>
-  </section>
+<!-- SHOWCASE (COIN VIDEO) -->
+<section id="showcase" class="relative flex flex-col items-center justify-center py-12 sm:py-16 md:py-20 z-10 bg-black/80 overflow-hidden">
+  <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-center text-white glitch" data-text="THE NOFACE COIN">
+    THE NOFACE COIN
+  </h2>
+  <div class="relative w-full flex justify-center px-4">
+    <video autoplay loop muted playsinline 
+      class="w-full max-w-sm sm:max-w-md md:max-w-2xl rounded-2xl shadow-[0_0_25px_#00ff00]/50">
+      <source src="noface_coin_nobg.webm" type="video/webm">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <p class="mt-6 text-gray-300 text-center max-w-lg px-4 text-sm sm:text-base md:text-lg">
+    As this coin flips — so is the traditional system that we have! This coin stands with <b>Kiko Barzaga</b> — Fighting corruption and ending the reign of power-hungry politicians.
+  </p>
+</section>
 
-  <!-- FEATURES -->
-  <section class="relative py-24 px-6 z-10 bg-gray-900/70 rounded-xl shadow-lg">
-    <h2 class="text-3xl font-bold text-center mb-12">Why No Face Solana?</h2>
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 text-center">
-      <div><div class="text-5xl mb-3">⚡</div><p>Fast & scalable on Solana</p></div>
-      <div><div class="text-5xl mb-3">🎭</div><p>No Identity, Pure Movement</p></div>
-      <div><div class="text-5xl mb-3">🌐</div><p>Decentralized & Community-Driven</p></div>
-      <div><div class="text-5xl mb-3">🔒</div><p>Built for the future of privacy</p></div>
-    </div>
-  </section>
+<!-- FEATURES -->
+<section class="relative py-12 sm:py-16 md:py-20 px-6 z-10 bg-gray-900/70 rounded-xl shadow-lg">
+  <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 text-white">Why No Face Solana?</h2>
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 text-center text-gray-300">
+    <div><div class="text-4xl sm:text-5xl mb-3">⚡</div><p class="text-sm sm:text-base">Fast & scalable on Solana</p></div>
+    <div><div class="text-4xl sm:text-5xl mb-3">🎭</div><p class="text-sm sm:text-base">No Identity, Pure Movement</p></div>
+    <div><div class="text-4xl sm:text-5xl mb-3">🌐</div><p class="text-sm sm:text-base">Decentralized & Community-Driven</p></div>
+    <div><div class="text-4xl sm:text-5xl mb-3">🔒</div><p class="text-sm sm:text-base">Built for the future of privacy</p></div>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer id="community" class="relative bg-black/80 py-12 text-center z-10">
-    <p class="mb-4 text-lg">Join the community</p>
-    <div class="flex flex-wrap justify-center gap-6 mb-6">
-      <a href="https://x.com/i/communities/1954910049610182989" class="glitch-link hover:text-gray-400" data-text="TWEET">Twitter</a>
-      <a href="https://t.me/+Ua41lGTmP7wwNDI8" class="glitch-link hover:text-gray-400" data-text="RAID">Telegram</a>
-      <a href="https://pump.fun/coin/7rnxiXfV4kajobuZ2qBHjVPBhhcT82TPdzF3cPfHpump" class="glitch-link hover:text-gray-400" data-text="PUMP">Pumpfun</a>
-    </div>
-    <p class="text-gray-600 text-sm sm:text-base">© 2025 No Face Solana</p>
-  </footer>
+<!-- FOOTER -->
+<footer id="community" class="relative bg-black/80 py-12 sm:py-16 md:py-20 text-center z-10">
+  <p class="mb-4 text-base sm:text-lg text-gray-200">Join the community</p>
+  <div class="flex flex-wrap justify-center gap-6 mb-6 text-sm sm:text-base">
+    <a href="https://x.com/i/communities/1954910049610182989" class="glitch-link hover:text-gray-400" data-text="TWEET">Twitter</a>
+    <a href="https://t.me/+Ua41lGTmP7wwNDI8" class="glitch-link hover:text-gray-400" data-text="RAID">Telegram</a>
+    <a href="https://pump.fun/coin/7rnxiXfV4kajobuZ2qBHjVPBhhcT82TPdzF3cPfHpump" class="glitch-link hover:text-gray-400" data-text="PUMP">Pumpfun</a>
+  </div>
+  <p class="text-gray-600 text-xs sm:text-sm md:text-base">© 2025 No Face Solana</p>
+</footer>
 
   <!-- MATRIX SCRIPT -->
   <script>
