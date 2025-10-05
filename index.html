@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>No Face Solana</title>
   <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
     /* ===== Matrix Background ===== */
     canvas#matrix {
@@ -71,15 +72,32 @@
       20%, 24%, 55% { opacity: 0.6; }
     }
 
-    /* ===== Glitch Glow Animation for Video ===== */
+    /* ===== Glitch Glow for Video ===== */
     @keyframes glitchGlow {
       0%, 100% { box-shadow: 0 0 10px #00ff00; filter: hue-rotate(0deg) brightness(1); }
       25% { box-shadow: 0 0 20px #00ff00aa; filter: hue-rotate(30deg) brightness(1.2); }
       50% { box-shadow: 0 0 40px #00ff00cc; filter: hue-rotate(-30deg) brightness(0.9); }
       75% { box-shadow: 0 0 15px #00ff0099; filter: hue-rotate(15deg) brightness(1.1); }
     }
+
     .glitch-video {
       animation: glitchGlow 3s infinite;
+    }
+
+    /* ===== Image Quality + Glitch Animation ===== */
+    .glitch-img {
+      animation: glitchImage 2s infinite;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+
+    @keyframes glitchImage {
+      0% { transform: translate(0); filter: hue-rotate(0deg); }
+      20% { transform: translate(-5px, 3px); filter: hue-rotate(20deg); }
+      40% { transform: translate(5px, -3px); filter: hue-rotate(-20deg); }
+      60% { transform: translate(-3px, -2px); filter: hue-rotate(10deg); }
+      80% { transform: translate(3px, 2px); filter: hue-rotate(-10deg); }
+      100% { transform: translate(0); filter: hue-rotate(0deg); }
     }
 
     /* ===== Footer Glitch Links ===== */
@@ -102,23 +120,11 @@
       opacity: 0;
     }
 
-    .glitch-link::before {
-      text-shadow: -2px 0 red;
-    }
+    .glitch-link::before { text-shadow: -2px 0 red; }
+    .glitch-link::after { text-shadow: 2px 0 blue; }
 
-    .glitch-link::after {
-      text-shadow: 2px 0 blue;
-    }
-
-    .glitch-link:hover::before {
-      animation: glitchLink 0.4s infinite;
-      opacity: 1;
-    }
-
-    .glitch-link:hover::after {
-      animation: glitchLink 0.5s infinite;
-      opacity: 1;
-    }
+    .glitch-link:hover::before { animation: glitchLink 0.4s infinite; opacity: 1; }
+    .glitch-link:hover::after { animation: glitchLink 0.5s infinite; opacity: 1; }
 
     @keyframes glitchLink {
       0% { clip: rect(0, 9999px, 0, 0); }
@@ -152,36 +158,40 @@
       .glitch { font-size: 2.5rem !important; }
       section { padding: 4rem 1.5rem; }
     }
+
     @media (max-width: 480px) {
       .glitch { font-size: 1.8rem !important; }
       p { font-size: 1rem; }
     }
   </style>
 </head>
-<body class="bg-black text-white font-sans relative overflow-x-hidden">
 
+<body class="bg-black text-white font-sans relative overflow-x-hidden">
   <!-- Matrix Canvas -->
   <canvas id="matrix"></canvas>
 
   <!-- Scroll Progress Bar -->
   <div id="scroll-progress"><div id="scroll-bar"></div></div>
 
-<!-- HERO -->
-<section class="relative min-h-screen flex flex-col items-center justify-center text-center z-10 px-4 space-y-6">
-  <img 
-     <source src="noface_coin.webp" type="video/webp" />
-    alt="No Face Solana" 
-    class="glitch-img w-56 md:w-72 lg:w-80 mx-auto rounded-2xl shadow-[0_0_25px_#00ff00]/50 mt-8">
-  
-  <h1 class="text-5xl md:text-7xl glitch" data-text="NO FACE SOLANA">NO FACE SOLANA</h1>
-  <p class="mt-4 text-base sm:text-lg md:text-2xl">The Faceless Movement on Solana</p>
+  <!-- NOFACE IMAGE -->
+  <section class="relative flex flex-col items-center justify-center pt-24 pb-4 z-10">
+    <picture>
+      <source srcset="https://i.ibb.co/zVQ1hkzR/noface-coin.webp" type="image/webp">
+      <img src="https://i.ibb.co/zVQ1hkzR/noface-coin.webp" alt="No Face Solana"
+        class="glitch-img w-64 md:w-96 mx-auto rounded-2xl shadow-[0_0_25px_#00ff00]/50"
+        loading="lazy" decoding="async">
+    </picture>
+  </section>
 
-  <div class="mt-8 flex flex-col sm:flex-row gap-4">
-    <a href="#about" class="px-6 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-200">Learn More</a>
-    <a href="#community" class="px-6 py-3 border border-white rounded-full font-semibold hover:bg-white hover:text-black">Join Community</a>
-  </div>
-</section>
-
+  <!-- HERO -->
+  <section class="relative min-h-screen flex flex-col items-center justify-start text-center z-10 px-4 mt-[-2rem]">
+    <h1 class="text-5xl md:text-7xl glitch" data-text="NO FACE SOLANA">NO FACE SOLANA</h1>
+    <p class="mt-4 text-base sm:text-lg md:text-2xl">The Faceless Movement on Solana</p>
+    <div class="mt-8 flex flex-col sm:flex-row gap-4">
+      <a href="#about" class="px-6 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-200">Learn More</a>
+      <a href="#community" class="px-6 py-3 border border-white rounded-full font-semibold hover:bg-white hover:text-black">Join Community</a>
+    </div>
+  </section>
 
   <!-- ABOUT -->
   <section id="about" class="relative py-24 px-6 max-w-4xl mx-auto text-center z-10 bg-black/70 rounded-xl shadow-lg">
@@ -233,32 +243,40 @@
   <script>
     const canvas = document.getElementById("matrix");
     const ctx = canvas.getContext("2d");
+
     function resizeCanvas() {
       canvas.height = window.innerHeight;
       canvas.width = window.innerWidth;
     }
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
+
     const letters = "アァイィウヴエェオカガキギクグケゲコゴサザシジスズABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     const matrix = letters.split("");
-    const fontSize = 14;
+    const fontSize = 13;
     const columns = Math.floor(window.innerWidth / fontSize);
     const drops = Array(columns).fill(1);
+
     function draw() {
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "#0F0";
       ctx.font = fontSize + "px monospace";
+
       for (let i = 0; i < drops.length; i++) {
         const text = matrix[Math.floor(Math.random() * matrix.length)];
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
         drops[i]++;
       }
-      if (window.innerWidth < 600) setTimeout(() => requestAnimationFrame(draw), 50);
-      else requestAnimationFrame(draw);
+
+      if (window.innerWidth < 600)
+        setTimeout(() => requestAnimationFrame(draw), 50);
+      else
+        requestAnimationFrame(draw);
     }
     draw();
+
     const scrollBar = document.getElementById("scroll-bar");
     window.addEventListener("scroll", () => {
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
