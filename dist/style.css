@@ -15,10 +15,22 @@
 
 /* Glitch glow animation for video */
 @keyframes glitchGlow {
-  0%, 100% { box-shadow: 0 0 10px #00ff00; filter: hue-rotate(0deg) brightness(1); }
-  25% { box-shadow: 0 0 20px #00ff00aa; filter: hue-rotate(30deg) brightness(1.2); }
-  50% { box-shadow: 0 0 40px #00ff00cc; filter: hue-rotate(-30deg) brightness(0.9); }
-  75% { box-shadow: 0 0 15px #00ff0099; filter: hue-rotate(15deg) brightness(1.1); }
+  0%, 100% {
+    box-shadow: 0 0 10px #888; /* grey glow */
+    filter: brightness(1);
+  }
+  25% {
+    box-shadow: 0 0 20px #999;
+    filter: brightness(1.1);
+  }
+  50% {
+    box-shadow: 0 0 40px #aaa;
+    filter: brightness(0.95);
+  }
+  75% {
+    box-shadow: 0 0 15px #777;
+    filter: brightness(1.05);
+  }
 }
 
 .glitch-video {
