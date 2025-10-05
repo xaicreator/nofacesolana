@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>No Face Solana</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* ===== Matrix Background ===== */
+    canvas#matrix {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      z-index: 0;
+    }
+
+    /* ===== Glitch Text ===== */
+    .glitch {
+      position: relative;
+      color: #fff;
+      font-weight: bold;
+      text-shadow: 0 0 4px #0f0;
+      animation: flicker 2s infinite;
+      word-wrap: break-word;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+    }
+
+    .glitch::before {
+      left: 2px;
+      text-shadow: -2px 0 red;
+      animation: glitchTop 1s infinite linear alternate-reverse;
+    }
+
+    .glitch::after {
+      left: -2px;
+      text-shadow: -2px 0 blue;
+      animation: glitchBottom 1.5s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitchTop {
+      0% { clip: rect(0, 9999px, 0, 0); }
+      20% { clip: rect(10px, 9999px, 50px, 0); }
+      40% { clip: rect(20px, 9999px, 100px, 0); }
+      60% { clip: rect(40px, 9999px, 80px, 0); }
+      80% { clip: rect(10px, 9999px, 90px, 0); }
+      100% { clip: rect(0, 9999px, 0, 0); }
+    }
+
+    @keyframes glitchBottom {
+      0% { clip: rect(0, 9999px, 0, 0); }
+      25% { clip: rect(20px, 9999px, 60px, 0); }
+      50% { clip: rect(40px, 9999px, 100px, 0); }
+      75% { clip: rect(30px, 9999px, 80px, 0); }
+      100% { clip: rect(0, 9999px, 0, 0); }
+    }
+
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+      20%, 24%, 55% { opacity: 0.6; }
+    }
+
+    /* ===== Glitch Glow Animation for Video ===== */
+    @keyframes glitchGlow {
+      0%, 100% { box-shadow: 0 0 10px #00ff00; filter: hue-rotate(0deg) brightness(1); }
+      25% { box-shadow: 0 0 20px #00ff00aa; filter: hue-rotate(30deg) brightness(1.2); }
+      50% { box-shadow: 0 0 40px #00ff00cc; filter: hue-rotate(-30deg) brightness(0.9); }
+      75% { box-shadow: 0 0 15px #00ff0099; filter: hue-rotate(15deg) brightness(1.1); }
+    }
+    .glitch-video {
+      animation: glitchGlow 3s infinite;
+    }
+
+    /* ===== Footer Glitch Links ===== */
+    .glitch-link {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .glitch-link::before,
+    .glitch-link::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      opacity: 0;
+    }
+
+    .glitch-link::before {
+      text-shadow: -2px 0 red;
+    }
+
+    .glitch-link::after {
+      text-shadow: 2px 0 blue;
+    }
+
+    .glitch-link:hover::before {
+      animation: glitchLink 0.4s infinite;
+      opacity: 1;
+    }
+
+    .glitch-link:hover::after {
+      animation: glitchLink 0.5s infinite;
+      opacity: 1;
+    }
+
+    @keyframes glitchLink {
+      0% { clip: rect(0, 9999px, 0, 0); }
+      25% { clip: rect(5px, 9999px, 20px, 0); }
+      50% { clip: rect(15px, 9999px, 40px, 0); }
+      75% { clip: rect(10px, 9999px, 35px, 0); }
+      100% { clip: rect(0, 9999px, 0, 0); }
+    }
+
+    /* ===== Scroll Progress Bar ===== */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 6px;
+      height: 100%;
+      background: rgba(0, 255, 0, 0.15);
+      z-index: 50;
+    }
+
+    #scroll-bar {
+      width: 100%;
+      background: #0f0;
+      box-shadow: 0 0 10px #0f0;
+      height: 0;
+      transition: height 0.15s linear;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .glitch { font-size: 2.5rem !important; }
+      section { padding: 4rem 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .glitch { font-size: 1.8rem !important; }
+      p { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body class="bg-black text-white font-sans relative overflow-x-hidden">
+
+  <!-- Matrix Canvas -->
+  <canvas id="matrix"></canvas>
+
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"><div id="scroll-bar"></div></div>
+
+    <!-- NOFACE IMAGE -->
+<section class="relative flex flex-col items-center justify-center py-12 z-10">
+  <img 
+    src="https://i.ibb.co/yB4ZyJQS/Chat-GPT-Image-Sep-22-2025-05-25-36-PM.png" 
+    alt="No Face Solana" 
+    class="glitch-img w-64 md:w-96 mx-auto rounded-2xl shadow-[0_0_25px_#00ff00]/50">
+</section>
+  
+  <!-- HERO -->
+  <section class="relative min-h-screen flex flex-col items-center justify-center text-center z-10 px-4">
+    <h1 class="text-5xl md:text-7xl glitch" data-text="NO FACE SOLANA">NO FACE SOLANA</h1>
+    <p class="mt-4 text-base sm:text-lg md:text-2xl">The Faceless Movement on Solana</p>
+    <div class="mt-8 flex flex-col sm:flex-row gap-4">
+      <a href="#about" class="px-6 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-200">Learn More</a>
+      <a href="#community" class="px-6 py-3 border border-white rounded-full font-semibold hover:bg-white hover:text-black">Join Community</a>
+    </div>
+  </section>
+
+
+
+  <!-- ABOUT -->
+  <section id="about" class="relative py-24 px-6 max-w-4xl mx-auto text-center z-10 bg-black/70 rounded-xl shadow-lg">
+    <h2 class="text-4xl font-bold mb-6">About the Movement</h2>
+    <p class="text-lg text-gray-300 leading-relaxed">
+      In a world of faces, we remain anonymous. <br/>
+      A faceless digital movement built on Solana — dedicated to privacy, speed, and community.
+    </p>
+  </section>
+
+  <!-- SHOWCASE (COIN VIDEO) -->
+  <section id="showcase" class="relative flex flex-col items-center justify-center py-20 z-10 bg-black/80 overflow-hidden">
+    <h2 class="text-4xl font-bold mb-8 text-center glitch" data-text="THE NOFACE COIN">THE NOFACE COIN</h2>
+    <div class="relative">
+      <video autoplay loop muted playsinline
+        class="w-full max-w-md md:max-w-2xl rounded-2xl shadow-[0_0_25px_#00ff00]/50 glitch-video">
+        <source src="noface_coin.webm" type="video/webm" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <p class="mt-6 text-gray-300 text-center max-w-lg">
+      Witness the endless flip — a coin that never lands, symbolizing the infinite energy of the faceless Solana movement.
+    </p>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="relative py-24 px-6 z-10 bg-gray-900/70 rounded-xl shadow-lg">
+    <h2 class="text-3xl font-bold text-center mb-12">Why No Face Solana?</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 text-center">
+      <div><div class="text-5xl mb-3">⚡</div><p>Fast & scalable on Solana</p></div>
+      <div><div class="text-5xl mb-3">🎭</div><p>No Identity, Pure Movement</p></div>
+      <div><div class="text-5xl mb-3">🌐</div><p>Decentralized & Community-Driven</p></div>
+      <div><div class="text-5xl mb-3">🔒</div><p>Built for the future of privacy</p></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="community" class="relative bg-black/80 py-12 text-center z-10">
+    <p class="mb-4 text-lg">Join the community</p>
+    <div class="flex flex-wrap justify-center gap-6 mb-6">
+      <a href="https://x.com/i/communities/1954910049610182989" class="glitch-link hover:text-gray-400" data-text="TWEET">Twitter</a>
+      <a href="https://t.me/+Ua41lGTmP7wwNDI8" class="glitch-link hover:text-gray-400" data-text="RAID">Telegram</a>
+      <a href="https://pump.fun/coin/7rnxiXfV4kajobuZ2qBHjVPBhhcT82TPdzF3cPfHpump" class="glitch-link hover:text-gray-400" data-text="PUMP">Pumpfun</a>
+    </div>
+    <p class="text-gray-600 text-sm sm:text-base">© 2025 No Face Solana</p>
+  </footer>
+
+  <!-- MATRIX SCRIPT -->
+  <script>
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+    function resizeCanvas() {
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+    const letters = "アァイィウヴエェオカガキギクグケゲコゴサザシジスズABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const matrix = letters.split("");
+    const fontSize = 14;
+    const columns = Math.floor(window.innerWidth / fontSize);
+    const drops = Array(columns).fill(1);
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#0F0";
+      ctx.font = fontSize + "px monospace";
+      for (let i = 0; i < drops.length; i++) {
+        const text = matrix[Math.floor(Math.random() * matrix.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+      if (window.innerWidth < 600) setTimeout(() => requestAnimationFrame(draw), 50);
+      else requestAnimationFrame(draw);
+    }
+    draw();
+    const scrollBar = document.getElementById("scroll-bar");
+    window.addEventListener("scroll", () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercent = (scrollTop / scrollHeight) * 100;
+      scrollBar.style.height = scrollPercent + "%";
+    });
+  </script>
+</body>
+</html>
