@@ -16,7 +16,7 @@
 /* Glitch glow animation for video */
 @keyframes glitchGlow {
   0%, 100% {
-    box-shadow: 0 0 10px #888; /* grey glow */
+    round-shadow: 0 0 10px #888; /* grey glow */
     filter: brightness(1);
   }
   25% {
