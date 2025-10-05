@@ -14,25 +14,8 @@
 </style>
 
 /* Glitch glow animation for video */
-@keyframes glitchGlow {
-  0%, 100% {
-    round-shadow: 0 0 10px #888; /* grey glow */
-    filter: brightness(1);
-  }
-  25% {
-    round-shadow: 0 0 20px #999;
-    filter: brightness(1.1);
-  }
-  50% {
-    round-shadow: 0 0 40px #aaa;
-    filter: brightness(0.95);
-  }
-  75% {
-    round-shadow: 0 0 15px #777;
-    filter: brightness(1.05);
-  }
+@keyframes video.glitch-video {
+  mix-blend-mode: lighten;
+  background-color: transparent;
 }
 
-.glitch-video {
-  animation: glitchGlow 3s infinite;
-}
