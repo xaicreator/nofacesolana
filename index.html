@@ -157,7 +157,7 @@
 </section>
 
 <!-- HERO -->
-<section class="relative flex flex-col items-center justify-center text-center z-10 px-4 pt-12 pb-12">
+<section class="relative flex flex-col items-center justify-center text-center z-10 px-4 pt-8 pb-8">
   <h1 class="text-5xl md:text-7xl font-bold">NO FACE SOLANA</h1>
   <p class="mt-4 text-base sm:text-lg md:text-2xl">The Faceless Movement on Solana</p>
   <div class="mt-6 flex flex-col sm:flex-row gap-4">
@@ -214,54 +214,6 @@
     <p class="text-gray-600 text-sm sm:text-base">© 2025 No Face Solana</p>
   </footer>
 
-  // Load Pepe Image
-  const pepeImage = new Image();
-  pepeImage.src = 'https://example.com/pepe.png';  // Replace with your Pepe image URL
-
-  pepeImage.onload = function() {
-    // Start animation once the image is loaded
-    requestAnimationFrame(draw);
-  };
-
-  // Draw Matrix Rain with Pepe icon
-  function draw() {
-    // Set background (semi-transparent black for trailing effect)
-    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Loop through each column
-    for (let i = 0; i < drops.length; i++) {
-      const x = i * fontSize;  // X position based on column
-      const y = drops[i] * fontSize;  // Y position based on drop's current position
-
-      // Draw Pepe icon instead of text
-      ctx.drawImage(pepeImage, x, y, fontSize, fontSize);  // Resize to fit fontSize
-
-      // Reset drop to top if it reaches the bottom of the screen
-      if (y > canvas.height && Math.random() > 0.975) {
-        drops[i] = 0;  // Restart drop at the top
-      }
-
-      // Move the drop down the screen
-      drops[i]++;
-    }
-
-    // Adjust animation speed for smaller screens
-    if (window.innerWidth < 600) {
-      setTimeout(() => requestAnimationFrame(draw), 50);
-    } else {
-      requestAnimationFrame(draw);
-    }
-  }
-
-  // Scroll event to update progress bar (if needed)
-  const scrollBar = document.getElementById("scroll-bar");
-  window.addEventListener("scroll", () => {
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrollPercent = (scrollTop / scrollHeight) * 100;
-    scrollBar.style.height = scrollPercent + "%";
-  });
 </script>
 </body>
 </html>
