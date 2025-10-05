@@ -1,3 +1,19 @@
+<style>
+  .glitch-img {
+    animation: glitchImage 2s infinite;
+  }
+
+  @keyframes glitchImage {
+    0% { transform: translate(0); filter: hue-rotate(0deg); }
+    20% { transform: translate(-5px, 3px); filter: hue-rotate(20deg); }
+    40% { transform: translate(5px, -3px); filter: hue-rotate(-20deg); }
+    60% { transform: translate(-3px, -2px); filter: hue-rotate(10deg); }
+    80% { transform: translate(3px, 2px); filter: hue-rotate(-10deg); }
+    100% { transform: translate(0); filter: hue-rotate(0deg); }
+  }
+</style>
+
+/* Glitch glow animation for video */
 @keyframes glitchGlow {
   0%, 100% {
     box-shadow: 0 0 10px #888; /* grey glow */
