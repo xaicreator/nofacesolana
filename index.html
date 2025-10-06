@@ -186,30 +186,56 @@
   </p>
 </section>
 
-<!-- CA AND STATS SECTION -->
-<section class="relative py-12 sm:py-16 md:py-20 px-6 z-10 bg-black/70 rounded-xl shadow-lg max-w-4xl mx-auto text-center">
-  <div class="ca mb-8">
-    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">Contract Details</h2>
-    <p class="text-sm sm:text-base text-gray-300 mb-2">
-      <strong>Contract Address (CA):</strong><br>
-      <span id="ca" class="break-all text-green-400">7rnxiXfV4kajobuZ2qBHjVPBhhcT82TPdzF3cPfHpump</span>
+<!-- CONTRACT & STATS SECTION (Tailwind-styled to match screenshot) -->
+<section class="relative py-12 sm:py-16 md:py-20 px-6 z-10 max-w-3xl mx-auto">
+  <!-- Contract Address Box -->
+  <div class="bg-[#101010]/70 border border-white/10 rounded-lg px-6 py-4 text-center mb-8">
+    <p class="text-white text-sm sm:text-base font-semibold mb-2">
+      Contract Address (CA):
     </p>
-    <button onclick="copyCA()" class="px-4 py-2 bg-white text-black rounded-full font-semibold hover:bg-gray-200 transition mb-2">
-      Copy CA
-    </button>
-    <a href="https://solscan.io/token/7rnxiXfV4kajobuZ2qBHjVPBhhcT82TPdzF3cPfHpump" target="_blank">
-      <img src="https://i.ibb.co/20gb5km3/IMG-2605.png" alt="Solscan" class="inline-block w-6 h-6 ml-2 align-middle" />
-    </a>
+    <p id="ca" class="text-sm sm:text-base text-gray-300 break-all mb-3">
+      7rnxiXfV4kajobuZ2qBHjVPBhhcT82TPdzF3cPfHpump
+    </p>
+    <div class="flex justify-center items-center gap-2">
+      <button onclick="copyCA()" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded transition">
+        Copy CA
+      </button>
+      <a href="https://solscan.io/token/7rnxiXfV4kajobuZ2qBHjVPBhhcT82TPdzF3cPfHpump" target="_blank">
+        <img src="https://i.ibb.co/20gb5km3/IMG-2605.png" alt="Solscan" class="w-6 h-6" />
+      </a>
+    </div>
   </div>
 
-  <div class="stats grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm sm:text-base text-gray-300 text-left max-w-xl mx-auto">
-    <div><span class="text-white">Network:</span> <strong>Solana</strong></div>
-    <div><span class="text-white">Market Cap:</span> <strong id="marketCap">Loading...</strong></div>
-    <div><span class="text-white">Total Supply:</span> <strong>999.15M</strong></div>
-    <div><span class="text-white">Circulating Supply:</span> <strong>999.15M</strong></div>
-    <div><span class="text-white">Holders:</span> <strong>2,253</strong></div>
-    <div><span class="text-white">Created On:</span> <strong>pump.fun</strong></div>
-    <div><span class="text-white">Status:</span> <strong>Graduated</strong></div>
+  <!-- Stats Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base">
+    <div class="bg-white/5 rounded-lg px-4 py-2 flex justify-between">
+      <span class="text-gray-300">Network:</span>
+      <span class="text-white font-semibold">Solana</span>
+    </div>
+    <div class="bg-white/5 rounded-lg px-4 py-2 flex justify-between">
+      <span class="text-gray-300">Market Cap:</span>
+      <span class="text-white font-semibold" id="marketCap">$21.8K</span>
+    </div>
+    <div class="bg-white/5 rounded-lg px-4 py-2 flex justify-between">
+      <span class="text-gray-300">Total Supply:</span>
+      <span class="text-white font-semibold">999.15M</span>
+    </div>
+    <div class="bg-white/5 rounded-lg px-4 py-2 flex justify-between">
+      <span class="text-gray-300">Circulating Supply:</span>
+      <span class="text-white font-semibold">999.15M</span>
+    </div>
+    <div class="bg-white/5 rounded-lg px-4 py-2 flex justify-between">
+      <span class="text-gray-300">Holders:</span>
+      <span class="text-white font-semibold">2,253</span>
+    </div>
+    <div class="bg-white/5 rounded-lg px-4 py-2 flex justify-between">
+      <span class="text-gray-300">Created On:</span>
+      <span class="text-white font-semibold">pump.fun</span>
+    </div>
+    <div class="bg-white/5 rounded-lg px-4 py-2 flex justify-between col-span-1 sm:col-span-2">
+      <span class="text-gray-300">Status:</span>
+      <span class="text-white font-semibold">Graduated</span>
+    </div>
   </div>
 </section>
 
