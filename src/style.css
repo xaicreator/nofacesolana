@@ -29,23 +29,32 @@ video {
   }
 }
 .donate-box {
-  position: fixed;
-  bottom: 20px;         /* distance from bottom */
-  right: 20px;          /* distance from right edge */
-  background: rgba(0, 0, 0, 0.6); /* semi-transparent dark background */
-  color: #fff;          /* white text */
-  padding: 10px 15px;
-  border-radius: 12px;
-  font-family: monospace;
-  font-size: 14px;
-  z-index: 9999;        /* stays above other elements */
-  backdrop-filter: blur(6px);
-  max-width: 250px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  font-family: Arial, sans-serif;
+  max-width: 300px;
+  width: 100%;
 }
 
-.donate-box .wallet {
-  word-break: break-all; /* wraps the long address */
-  font-size: 12px;
-  color: #00ff99;       /* nice crypto-green accent */
-  margin-top: 4px;
+@media (min-width: 768px) {
+  .donate-box {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+@media (max-width: 767px) {
+  .donate-box {
+    position: static;
+    margin: 2rem auto 0;
+    top: auto;
+    transform: none;
+    width: 80%;
+    max-width: none;
+  }
 }
