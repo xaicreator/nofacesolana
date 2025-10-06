@@ -40,6 +40,16 @@ video {
   width: 100%;
 }
 
+.donate-box p {
+  font-size: 1rem; /* Set default font size for all paragraphs in the box */
+}
+
+.donate-box .wallet-address {
+  font-size: 0.75rem; /* Make the wallet address smaller */
+  word-wrap: break-word; /* Optional: ensures long addresses break properly */
+  margin-top: 8px;
+}
+
 @media (min-width: 768px) {
   .donate-box {
     position: fixed;
@@ -57,5 +67,15 @@ video {
     transform: none;
     width: 80%;
     max-width: none;
+  }
+
+  /* Ensure all paragraphs are the same size on mobile */
+  .donate-box p {
+    font-size: 0.875rem; /* Adjust font size on mobile to match smaller size */
+  }
+
+  /* If you still want the wallet address to be smaller, you can tweak it here */
+  .donate-box .wallet-address {
+    font-size: 0.75rem; /* Keep it smaller for wallet address */
   }
 }
