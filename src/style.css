@@ -4,6 +4,11 @@
   animation: none;
 }
 
+/* Make sure video background stays transparent */
+.glitch-video {
+  background-color: transparent;
+}
+
 /* Default styles (for mobile phones and small screens) */
 video {
   width: 100%;  /* Full width on small screens */
