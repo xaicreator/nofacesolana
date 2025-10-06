@@ -186,6 +186,34 @@
   </p>
 </section>
 
+<!-- CA AND STATS SECTION -->
+<section class="relative py-12 sm:py-16 md:py-20 px-6 z-10 bg-black/70 rounded-xl shadow-lg max-w-4xl mx-auto text-center">
+  <div class="ca mb-8">
+    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">Contract Details</h2>
+    <p class="text-sm sm:text-base text-gray-300 mb-2">
+      <strong>Contract Address (CA):</strong><br>
+      <span id="ca" class="break-all text-green-400">7rnxiXfV4kajobuZ2qBHjVPBhhcT82TPdzF3cPfHpump</span>
+    </p>
+    <button onclick="copyCA()" class="px-4 py-2 bg-white text-black rounded-full font-semibold hover:bg-gray-200 transition mb-2">
+      Copy CA
+    </button>
+    <a href="https://solscan.io/token/7rnxiXfV4kajobuZ2qBHjVPBhhcT82TPdzF3cPfHpump" target="_blank">
+      <img src="https://i.ibb.co/20gb5km3/IMG-2605.png" alt="Solscan" class="inline-block w-6 h-6 ml-2 align-middle" />
+    </a>
+  </div>
+
+  <div class="stats grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm sm:text-base text-gray-300 text-left max-w-xl mx-auto">
+    <div><span class="text-white">Network:</span> <strong>Solana</strong></div>
+    <div><span class="text-white">Market Cap:</span> <strong id="marketCap">Loading...</strong></div>
+    <div><span class="text-white">Total Supply:</span> <strong>999.15M</strong></div>
+    <div><span class="text-white">Circulating Supply:</span> <strong>999.15M</strong></div>
+    <div><span class="text-white">Holders:</span> <strong>2,253</strong></div>
+    <div><span class="text-white">Created On:</span> <strong>pump.fun</strong></div>
+    <div><span class="text-white">Status:</span> <strong>Graduated</strong></div>
+  </div>
+</section>
+
+  
 <!-- SHOWCASE (COIN VIDEO) -->
 <section id="showcase" class="relative flex flex-col items-center justify-center py-12 sm:py-16 md:py-20 z-10 bg-black/80 overflow-hidden">
   <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-center text-white glitch" data-text="THE NOFACE COIN">
