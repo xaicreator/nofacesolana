@@ -28,3 +28,26 @@ video {
     max-width: 50%;  /* Limit to 50% width on even larger screens */
   }
 }
+
+.donate-box {
+  position: fixed;
+  bottom: 20px;         /* distance from bottom */
+  right: 20px;          /* distance from right edge */
+  background: rgba(0, 0, 0, 0.6); /* semi-transparent dark background */
+  color: #fff;          /* white text */
+  padding: 10px 15px;
+  border-radius: 12px;
+  font-family: monospace;
+  font-size: 14px;
+  z-index: 9999;        /* stays above other elements */
+  backdrop-filter: blur(6px);
+  max-width: 250px;
+}
+
+.donate-box .wallet {
+  word-break: break-all; /* wraps the long address */
+  font-size: 12px;
+  color: #00ff99;       /* nice crypto-green accent */
+  margin-top: 4px;
+}
+
