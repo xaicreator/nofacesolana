@@ -150,7 +150,19 @@
 <!-- NOFACE IMAGE -->
 <section class="relative flex flex-col items-center justify-center pt-20 pb-12 sm:pt-28 sm:pb-16 md:pt-36 md:pb-20 z-10">
   <picture>
-    <source srcset="noface-coin.webp" type="image/webp">
+    <!-- Use responsive image sources -->
+    <source 
+      srcset="
+        noface-coin-200.webp 200w,
+        noface-coin-320.webp 320w,
+        noface-coin-480.webp 480w,
+        noface-coin-640.webp 640w,
+        noface-coin.webp 800w
+      " 
+      type="image/webp"
+      sizes="(max-width: 768px) 80vw, 400px">
+
+    <!-- Fallback image -->
     <img 
       src="noface-coin.webp" 
       alt="No Face Solana"
@@ -159,6 +171,7 @@
       decoding="async">
   </picture>
 </section>
+
 
 <!-- HERO -->
 <section class="relative flex flex-col items-center justify-center text-center z-10 px-4 py-12 sm:py-16 md:py-20">
