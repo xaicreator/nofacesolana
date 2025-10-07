@@ -208,7 +208,7 @@
   </div>
 
   <!-- Stats Grid -->
- <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base">
   <div class="bg-white/5 rounded-lg px-4 py-2 flex justify-between">
     <span class="text-gray-300">🌐 Network:</span>
     <span class="text-white font-semibold">Solana</span>
@@ -227,14 +227,43 @@
   </div>
   <div class="bg-white/5 rounded-lg px-4 py-2 flex justify-between">
     <span class="text-gray-300">👥 Holders:</span>
-    <span class="text-white font-semibold">2,253</span>
+    <span class="text-white font-semibold" id="holders">2,253</span>
   </div>
   <div class="bg-white/5 rounded-lg px-4 py-2 flex justify-between">
     <span class="text-gray-300">⚙️ Status:</span>
     <span class="text-white font-semibold">Graduated</span>
   </div>
 </div>
-</section>
+
+<script>
+  // Function to simulate live updates for Market Cap and Holders
+  function updateStats() {
+    const contractAddress = '7rnxiXfV4kajobuZ2qBHjVPBhhcT82TPdzF3cPfHpump'; // NoFace Token Address
+    
+    // Fetch data from Solscan API (token details endpoint)
+    fetch(`https://api.solscan.io/api/token/meta?tokenAddress=${contractAddress}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.code === 200) {
+          const marketCap = data.data.marketCap; // Example: '$22.5K'
+          const holders = data.data.holders; // Example: '2,345'
+
+          // Update the DOM elements with the new data
+          document.getElementById('marketCap').innerText = marketCap;
+          document.getElementById('holders').innerText = holders;
+        } else {
+          console.error('Error: Unable to fetch data');
+        }
+      })
+      .catch(error => console.error('Error fetching stats:', error));
+  }
+
+  // Call the updateStats function every 10 seconds (10000ms)
+  setInterval(updateStats, 10000);
+  
+  // Initial load on page load
+  window.onload = updateStats;
+</script>
 
   
 <!-- SHOWCASE (COIN VIDEO) -->
@@ -250,7 +279,7 @@
     </video>
   </div>
   <p class="mt-6 text-gray-300 text-center max-w-lg px-4 text-sm sm:text-base md:text-lg">
-    As this coin flips — so is the old system! <br> This coin stands with <b>Kiko Barzaga</b> and <b>Vico Sotto</b>— Fighting corruption and ending the reign of traditional politicians and greedy contractors.
+    As this coin flips — so is the old system! <br>  <b>DECENTRALIZED.</b> <b>ANONYMOUS.</b> <b>UNBREAKABLE.</b>
   </p>
 </section>
 
