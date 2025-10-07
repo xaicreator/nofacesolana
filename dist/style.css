@@ -28,3 +28,7 @@ video {
     max-width: 50%;  /* Limit to 50% width on even larger screens */
   }
 }
+img, video {
+  pointer-events: none;  /* disables clicking, dragging, right-clicking */
+  user-select: none;     /* can't select the element */
+}
