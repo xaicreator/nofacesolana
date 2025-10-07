@@ -381,5 +381,36 @@
       scrollBar.style.height = scrollPercent + "%";
     });
   </script>
+
+<!-- MarketCap SCRIPT -->  
+<script>
+    function copyCA() {
+      const ca = document.getElementById("ca").innerText;
+      navigator.clipboard.writeText(ca).then(() => {
+        alert("CA copied to clipboard!");
+      });
+    }
+
+    async function updateMarketCap() {
+      try {
+        const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=no-face&vs_currencies=usd&include_market_cap=true");
+        const data = await res.json();
+        const cap = data["no-face"].usd_market_cap;
+
+        document.getElementById("marketCap").textContent =
+          cap ? `$${(cap / 1000).toFixed(1)}K` : "N/A";
+      } catch (e) {
+        console.error("Error fetching market cap:", e);
+        document.getElementById("marketCap").textContent = "N/A";
+      }
+    }
+
+    // Fetch once on load
+    updateMarketCap();
+
+    // Refresh every 5 minutes
+    setInterval(updateMarketCap, 300000);
+  </script>
+  
 </body>
 </html>
