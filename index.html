@@ -488,11 +488,18 @@ function scrollGallery(direction) {
   </script>
   
 <audio id="wickStyle" loop>
-  <source src="john_wick.mp3" type="audio/mpeg/mp3">
+  <source src="john_wick.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
 </audio>
 
-<button onclick="document.getElementById('wickStyle').play()">🔊 Play Theme</button>
-<button onclick="document.getElementById('wickStyle').pause()">⏸ Pause</button>
+<div style="margin-top: 1em;">
+  <button onclick="document.getElementById('wickStyle').play()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+    🔊 Play Theme
+  </button>
+  <button onclick="document.getElementById('wickStyle').pause()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
+    ⏸ Pause
+  </button>
+</div>
   
 </body>
 </html>
