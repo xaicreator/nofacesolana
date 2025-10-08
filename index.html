@@ -299,43 +299,78 @@
 
 <!-- Meme Gallery -->
 <section class="relative py-12 sm:py-16 md:py-20 px-6 z-10 bg-gray-900/70 rounded-xl shadow-lg">
-  <h2 class="text-2xl font-bold text-white mb-6">Meme Gallery</h2>
-  <div class="gallery flex gap-4 overflow-x-auto pb-4 scroll-smooth -mx-6 px-6">
-    <img src="https://i.ibb.co/MkkdznDv/IMG-2153.png" alt="$NoFace 1" class="rounded-lg border-2 border-gray-700 shadow-md">
-    <img src="https://i.ibb.co/rffXQq2w/Chat-GPT-Image-Aug-31-2025-at-09-07-16-AM.png" alt="$Noface 2" class="rounded-lg border-2 border-gray-700 shadow-md">
-    <img src="https://i.ibb.co/rG4RV4bS/IMG-2583.png" alt="$Noface 3" class="rounded-lg border-2 border-gray-700 shadow-md">
-    <img src="https://i.ibb.co/nNfFMHzv/IMG-2233.png" alt="$Noface 4" class="rounded-lg border-2 border-gray-700 shadow-md">
-    <img src="https://i.ibb.co/yB7p88V4/IMG-1988.jpg" alt="$Noface 5" class="rounded-lg border-2 border-gray-700 shadow-md">
+  <h2 class="text-2xl font-bold text-white mb-6 text-center">Meme Gallery</h2>
+  
+  <div class="relative flex items-center justify-center">
+    <!-- Left Arrow -->
+    <button class="arrow left-arrow absolute left-0 z-20 bg-gray-700/60 hover:bg-gray-700 text-white rounded-full p-3 m-2 hidden md:flex" onclick="scrollGallery(-1)">
+      &#10094;
+    </button>
+
+    <!-- Gallery -->
+    <div class="gallery flex gap-4 overflow-x-auto pb-4 px-6 scroll-smooth">
+      <img src="https://i.ibb.co/MkkdznDv/IMG-2153.png" alt="$NoFace 1" class="rounded-lg border-2 border-gray-700 shadow-md">
+      <img src="https://i.ibb.co/rffXQq2w/Chat-GPT-Image-Aug-31-2025-at-09-07-16-AM.png" alt="$Noface 2" class="rounded-lg border-2 border-gray-700 shadow-md">
+      <img src="https://i.ibb.co/rG4RV4bS/IMG-2583.png" alt="$Noface 3" class="rounded-lg border-2 border-gray-700 shadow-md">
+      <img src="https://i.ibb.co/nNfFMHzv/IMG-2233.png" alt="$Noface 4" class="rounded-lg border-2 border-gray-700 shadow-md">
+      <img src="https://i.ibb.co/yB7p88V4/IMG-1988.jpg" alt="$Noface 5" class="rounded-lg border-2 border-gray-700 shadow-md">
+    </div>
+
+    <!-- Right Arrow -->
+    <button class="arrow right-arrow absolute right-0 z-20 bg-gray-700/60 hover:bg-gray-700 text-white rounded-full p-3 m-2 hidden md:flex" onclick="scrollGallery(1)">
+      &#10095;
+    </button>
   </div>
 </section>
 
 <style>
 /* Horizontally scrollable gallery */
 .gallery {
-  scroll-behavior: smooth;            /* smooth scroll */
-  -webkit-overflow-scrolling: touch;  /* smooth scroll on iOS */
+  scroll-behavior: smooth;            
+  -webkit-overflow-scrolling: touch;  
+  justify-content: center;            /* center gallery on large screens */
 }
 
 .gallery::-webkit-scrollbar {
-  display: none;                       /* hide scrollbar */
+  display: none;                       
 }
 
 .gallery img {
-  flex: 0 0 auto;                      /* prevent shrinking */
+  flex: 0 0 auto;                      
   max-width: 220px;
-  min-width: 150px;                     /* keep images readable on small screens */
+  min-width: 150px;                     
   width: 100%;
   border-radius: 10px;
   border: 2px solid #444;
   transition: transform 0.3s;
-  user-select: none;                    /* prevent selection */
-  -webkit-user-drag: none;             /* prevent dragging on Safari */
+  user-select: none;                    
+  -webkit-user-drag: none;             
 }
 
 .gallery img:hover {
-  transform: scale(1.05);              /* hover zoom effect */
+  transform: scale(1.05);              
+}
+
+/* Arrow buttons */
+.arrow {
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: transform 0.2s;
+}
+.arrow:hover {
+  transform: scale(1.2);
 }
 </style>
+
+<script>
+// Scroll gallery left or right
+function scrollGallery(direction) {
+  const gallery = document.querySelector('.gallery');
+  const scrollAmount = 300; // pixels per click
+  gallery.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+}
+</script>
   
 <!-- FEATURES -->
 <section class="relative py-12 sm:py-16 md:py-20 px-6 z-10 bg-gray-900/70 rounded-xl shadow-lg">
