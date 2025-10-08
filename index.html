@@ -487,21 +487,47 @@ function scrollGallery(direction) {
     setInterval(updateMarketCap, 300000);
   </script>
 
-<a href="john_wick.mp3" target="_blank">Test MP3 File</a>
-  
-<audio id="wickStyle" loop>
-  <source src="john_wick.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+ <!-- Audio element (hidden controls) -->
+  <audio id="wickAudio" loop preload="auto">
+    <source src="john_wick.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
-<div style="margin-top: 1em;">
-  <button onclick="document.getElementById('wickStyle').play()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
-    🔊 Play Theme
-  </button>
-  <button onclick="document.getElementById('wickStyle').pause()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
-    ⏸ Pause
-  </button>
-</div>
+  <!-- Sound toggle button -->
+  <div id="soundToggle">🔈</div>
+
+  <script>
+    const audio = document.getElementById('wickAudio');
+    const toggle = document.getElementById('soundToggle');
+    let isPlaying = false;
+
+    // Optional: Try autoplay (but may be blocked)
+    document.addEventListener('DOMContentLoaded', () => {
+      audio.volume = 0.5;
+      // audio.play().then(() => {
+      //   isPlaying = true;
+      //   toggle.textContent = "🔊";
+      // }).catch(err => {
+      //   console.warn("Autoplay blocked:", err);
+      // });
+    });
+
+    toggle.addEventListener('click', () => {
+      if (isPlaying) {
+        audio.pause();
+        isPlaying = false;
+        toggle.textContent = "🔈";  // show muted icon
+      } else {
+        audio.play().then(() => {
+          isPlaying = true;
+          toggle.textContent = "🔊";  // show sound icon
+        }).catch(err => {
+          console.error("Play failed:", err);
+          // could prompt user or fall back
+        });
+      }
+    });
+  </script>
   
 </body>
 </html>
