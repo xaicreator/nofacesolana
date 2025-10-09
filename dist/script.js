@@ -16,3 +16,44 @@
 
   updateMarketCap();
 </script>
+const audio = document.getElementById('wickAudio');
+const toggle = document.getElementById('soundToggle');
+let playing = false;
+
+// Fade in audio
+function fadeInAudio() {
+  audio.volume = 0;
+  const fade = setInterval(() => {
+    if (audio.volume < 0.5) {
+      audio.volume += 0.05;
+    } else {
+      clearInterval(fade);
+    }
+  }, 200);
+}
+
+// Unlock autoplay after user interacts
+function enableAudio() {
+  if (!playing) {
+    audio.play().then(() => {
+      playing = true;
+      fadeInAudio();
+      toggle.textContent = '🔊';
+    }).catch(err => console.warn('Autoplay blocked:', err));
+  }
+}
+
+// Manual toggle
+toggle.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    toggle.textContent = '🔊';
+  } else {
+    audio.pause();
+    toggle.textContent = '🔈';
+  }
+});
+
+document.addEventListener('click', enableAudio, { once: true });
+document.addEventListener('scroll', enableAudio, { once: true });
+
