@@ -32,3 +32,25 @@ img, video {
   pointer-events: none;  /* disables clicking, dragging, right-clicking */
   user-select: none;     /* can't select the element */
 }
+#soundToggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0,255,0,0.15);
+  border: 1px solid #00ff00;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: #00ff00;
+  cursor: pointer;
+  z-index: 9999;
+  transition: all 0.3s ease;
+}
+#soundToggle:hover {
+  background: rgba(0,255,0,0.3);
+  transform: scale(1.1);
+}
