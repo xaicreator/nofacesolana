@@ -488,47 +488,47 @@ function scrollGallery(direction) {
     setInterval(updateMarketCap, 300000);
   </script>
 
- <!-- Audio element (hidden controls) -->
-  <audio id="wickAudio" loop preload="auto">
-    <source src="john_wick.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+<!-- Audio element (hidden controls) -->
+<audio id="wickAudio" loop preload="auto">
+  <source src="john_wick.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 
-  <!-- Sound toggle button -->
-  <div id="soundToggle">🔈</div>
+<!-- Sound toggle button -->
+<div id="soundToggle">🔈</div>
 
-  <script>
-    const audio = document.getElementById('wickAudio');
-    const toggle = document.getElementById('soundToggle');
-    let isPlaying = false;
+<script>
+  const audio = document.getElementById('wickAudio');
+  const toggle = document.getElementById('soundToggle');
+  let isPlaying = false;
 
-    // Optional: Try autoplay (but may be blocked)
-    document.addEventListener('DOMContentLoaded', () => {
+  // Optional: Try autoplay unlock after interaction
+  document.addEventListener('click', enableAudio, { once: true });
+  document.addEventListener('scroll', enableAudio, { once: true });
+
+  function enableAudio() {
+    if (!isPlaying) {
       audio.volume = 0.5;
-      // audio.play().then(() => {
-      //   isPlaying = true;
-      //   toggle.textContent = "🔊";
-      // }).catch(err => {
-      //   console.warn("Autoplay blocked:", err);
-      // });
-    });
+      audio.play().then(() => {
+        isPlaying = true;
+        toggle.textContent = "🔊";
+      }).catch(err => console.warn("Autoplay blocked:", err));
+    }
+  }
 
-    toggle.addEventListener('click', () => {
-      if (isPlaying) {
-        audio.pause();
-        isPlaying = false;
-        toggle.textContent = "🔈";  // show muted icon
-      } else {
-        audio.play().then(() => {
-          isPlaying = true;
-          toggle.textContent = "🔊";  // show sound icon
-        }).catch(err => {
-          console.error("Play failed:", err);
-          // could prompt user or fall back
-        });
-      }
-    });
-  </script>
-
+  // Manual toggle button
+  toggle.addEventListener('click', () => {
+    if (isPlaying) {
+      audio.pause();
+      isPlaying = false;
+      toggle.textContent = "🔈";
+    } else {
+      audio.play().then(() => {
+        isPlaying = true;
+        toggle.textContent = "🔊";
+      }).catch(err => console.error("Play failed:", err));
+    }
+  });
+</script>
 </body>
 </html>
