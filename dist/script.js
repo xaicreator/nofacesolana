@@ -56,4 +56,43 @@ toggle.addEventListener('click', () => {
 
 document.addEventListener('click', enableAudio, { once: true });
 document.addEventListener('scroll', enableAudio, { once: true });
+const audio = document.getElementById('wickAudio');
+const toggle = document.getElementById('soundToggle');
+const hint = document.getElementById('soundHint');
+let isPlaying = false;
+
+function fadeInAudio() {
+  audio.volume = 0;
+  const fade = setInterval(() => {
+    if (audio.volume < 0.5) {
+      audio.volume += 0.05;
+    } else {
+      clearInterval(fade);
+    }
+  }, 200);
+}
+
+function playAudio() {
+  audio.play().then(() => {
+    isPlaying = true;
+    fadeInAudio();
+    hint.classList.add('fade-out'); // hide hint
+    toggle.textContent = "🔊";
+  }).catch(err => console.warn("Autoplay blocked:", err));
+}
+
+toggle.addEventListener('click', () => {
+  if (isPlaying) {
+    audio.pause();
+    isPlaying = false;
+    toggle.textContent = "🔈";
+  } else {
+    playAudio();
+  }
+});
+
+// Play audio on first interaction (click/scroll)
+document.addEventListener('click', playAudio, { once: true });
+document.addEventListener('scroll', playAudio, { once: true });
+
 
