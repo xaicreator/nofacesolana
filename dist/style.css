@@ -54,3 +54,31 @@ img, video {
   background: rgba(0,255,0,0.3);
   transform: scale(1.1);
 }
+#soundHint {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #00ff00;
+  font-size: 1rem;
+  font-family: monospace;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #00ff00;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  animation: pulseGlow 1.5s infinite alternate;
+}
+
+#soundHint.fade-out {
+  opacity: 0;
+  pointer-events: none;
+  animation: none;
+}
+
+@keyframes pulseGlow {
+  0%   { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; transform: scale(1); }
+  50%  { text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; transform: scale(1.05); }
+  100% { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; transform: scale(1); }
+}
