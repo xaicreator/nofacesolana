@@ -199,7 +199,6 @@
         Copy CA
       </button>
       <a href="https://solscan.io/token/24MXQ4PoYm5J15ESPmAmSNzAuwZHnuHmkJdQW4iBpump" target="_blank" rel="noopener noreferrer">
-      <a href="https://solscan.io/token/24MXQ4PoYm5J15ESPmAmSNzAuwZHnuHmkJdQW4iBpump" target="_blank" rel="noopener noreferrer">
         <img src="https://i.ibb.co/20gb5km3/IMG-2605.png" alt="View on Solscan" class="w-6 h-6 hover:scale-110 transition-transform" />
       </a>
     </div>
@@ -226,7 +225,7 @@
       </div>
       <div class="flex justify-between">
         <span>Holders:</span>
-        <strong id="holders" class="text-white">2,253</strong>
+        <strong id="holders" class="text-white">Loading...</strong>
       </div>
       <div class="flex justify-between">
         <span>Created On:</span>
@@ -236,50 +235,9 @@
         <span>Status:</span>
         <strong class="text-white">Graduated</strong>
       </div>
-
-      <!-- Optional: Burn Address (Hidden by default) -->
-      <div class="flex justify-between hidden">
-        <span>Burn Address:</span>
-        <strong class="flex items-center gap-2 text-white">
-          11111111111111111111111111111111
-          <a href="https://solscan.io/account/11111111111111111111111111111111" target="_blank" rel="noopener noreferrer">
-            <img src="https://i.ibb.co/MkkdznDv/IMG-2153.png" alt="Burn on Solscan" class="w-4 h-4 opacity-70 hover:opacity-100 transition-opacity" />
-          </a>
-        </strong>
-      </div>
     </div>
   </div>
 </section>
-
-  <!-- Stats Grid -->
- <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base">
-  <div class="bg-white/5 rounded-lg px-4 py-2 flex justify-between">
-    <span class="text-gray-300">🌐 Network:</span>
-    <span class="text-white font-semibold">Solana</span>
-  </div>
-  <div class="bg-white/5 rounded-lg px-4 py-2 flex justify-between">
-    <span class="text-gray-300">💰 Market Cap:</span>
-    <span class="text-white font-semibold" id="marketCap">$21.8K</span>
-  </div>
-  <div class="bg-white/5 rounded-lg px-4 py-2 flex justify-between">
-    <span class="text-gray-300">🧾 Total Supply:</span>
-    <span class="text-white font-semibold">999.15M</span>
-  </div>
-  <div class="bg-white/5 rounded-lg px-4 py-2 flex justify-between">
-    <span class="text-gray-300">📊 Circulating Supply:</span>
-    <span class="text-white font-semibold">999.15M</span>
-  </div>
-  <div class="bg-white/5 rounded-lg px-4 py-2 flex justify-between">
-    <span class="text-gray-300">👥 Holders:</span>
-    <span class="text-white font-semibold">2,253</span>
-  </div>
-  <div class="bg-white/5 rounded-lg px-4 py-2 flex justify-between">
-    <span class="text-gray-300">⚙️ Status:</span>
-    <span class="text-white font-semibold">Graduated</span>
-  </div>
-</div>
-</section>
-
 
 <!-- SHOWCASE (COIN VIDEO) -->
 <section id="showcase" class="relative flex flex-col items-center justify-center py-12 sm:py-16 md:py-20 z-10 bg-black/70 overflow-hidden">
@@ -463,33 +421,45 @@ function scrollGallery(direction) {
 
 <!-- MarketCap SCRIPT -->  
 <script>
-    function copyCA() {
-      const ca = document.getElementById("ca").innerText;
-      navigator.clipboard.writeText(ca).then(() => {
-        alert("CA copied to clipboard!");
-      });
-    }
+  const CONTRACT = "24MXQ4PoYm5J15ESPmAmSNzAuwZHnuHmkJdQW4iBpump";
 
-    async function updateMarketCap() {
-      try {
-        const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=no-face&vs_currencies=usd&include_market_cap=true");
-        const data = await res.json();
-        const cap = data["no-face"].usd_market_cap;
+  // Copy CA
+  function copyCA() {
+    navigator.clipboard.writeText(CONTRACT);
+    alert("✅ Contract Address copied!");
+  }
 
-        document.getElementById("marketCap").textContent =
-          cap ? `$${(cap / 1000).toFixed(1)}K` : "N/A";
-      } catch (e) {
-        console.error("Error fetching market cap:", e);
-        document.getElementById("marketCap").textContent = "N/A";
+  // Fetch Live Stats
+  async function updateStats() {
+    try {
+      const res = await fetch(`https://pump.fun/api/coins/${CONTRACT}`);
+      const data = await res.json();
+
+      // Update market cap
+      const marketCap = data.marketCap || 0;
+      document.getElementById('marketCap').textContent = `$${(marketCap / 1000).toFixed(1)}K`;
+
+      // Update holders (API may include it or need separate Solscan call)
+      if (data.holders) {
+        document.getElementById('holders').textContent = data.holders.toLocaleString();
+      } else {
+        // fallback to Solscan API
+        const solscanRes = await fetch(`https://api.solscan.io/token/holders?tokenAddress=${CONTRACT}`);
+        const solscanData = await solscanRes.json();
+        document.getElementById('holders').textContent =
+          solscanData.data?.total || "Unavailable";
       }
+    } catch (error) {
+      console.error("Failed to fetch stats:", error);
+      document.getElementById('marketCap').textContent = "Unavailable";
+      document.getElementById('holders').textContent = "Unavailable";
     }
+  }
 
-    // Fetch once on load
-    updateMarketCap();
-
-    // Refresh every 5 minutes
-    setInterval(updateMarketCap, 300000);
-  </script>
+  // Run every 60 seconds
+  updateStats();
+  setInterval(updateStats, 60000);
+</script>
 
 <!-- Audio element (hidden controls) -->
 <audio id="wickAudio" loop preload="auto">
