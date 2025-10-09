@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>No Face Solana</title>
+  <title>No Face Solana X BSC</title>
   <link rel="icon" type="image/webp" href="https://i.ibb.co/zVQ1hkzR/noface-coin.webp"> <!-- ✅ Favicon -->
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -160,7 +160,7 @@
 <!-- HERO -->
 <section class="relative flex flex-col items-center justify-center text-center z-10 px-4 py-12 sm:py-16 md:py-20">
   <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight drop-shadow-[0_0_10px_#00ff00]">
-    NO FACE SOLANA
+    NO FACE SOLANA x BSC
   </h1>
   <p class="mt-4 text-base sm:text-lg md:text-2xl text-gray-300 max-w-xl mx-auto">
     The Faceless Movement on Solana
@@ -184,69 +184,38 @@
   </p>
 </section>
 
-<!-- CONTRACT & STATS SECTION -->
-<section class="relative py-12 sm:py-16 md:py-20 px-6 z-10 max-w-3xl mx-auto">
-  <!-- Contract Address Box -->
-  <div class="bg-[#101010]/70 border border-white/10 rounded-lg px-6 py-4 text-center mb-10">
-    <p class="text-white text-sm sm:text-base font-semibold mb-2">
-      Contract Address (CA):
-    </p>
-    <p id="ca" class="text-sm sm:text-base text-gray-300 break-all mb-4">
-      new CA will be posted
-    </p>
-    <div class="flex justify-center items-center gap-3">
-      <button onclick="copyCA()" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded transition">
-        Copy CA
-      </button>
-      <a href="https://solscan.io/token/7rnxiXfV4kajobuZ2qBHjVPBhhcT82TPdzF3cPfH" target="_blank" rel="noopener noreferrer">
-        <img src="https://i.ibb.co/20gb5km3/IMG-2605.png" alt="View on Solscan" class="w-6 h-6 hover:scale-110 transition-transform" />
-      </a>
-    </div>
+<!-- 🌐 MULTICHAIN TOGGLE -->
+<section class="text-center py-12 text-white">
+  <h2 class="text-3xl sm:text-4xl font-bold mb-8 glitch" data-text="Select Chain">Select Chain</h2>
+
+  <!-- Toggle Buttons -->
+  <div class="flex justify-center gap-4 mb-10">
+    <button id="solanaBtn" onclick="showChain('solana')" 
+      class="chain-btn bg-green-500/80 text-black font-semibold rounded-full px-6 py-3 hover:bg-green-400 transition">
+      🟩 Solana
+    </button>
+    <button id="bscBtn" onclick="showChain('bsc')" 
+      class="chain-btn bg-yellow-400/80 text-black font-semibold rounded-full px-6 py-3 hover:bg-yellow-300 transition">
+      🟨 BSC
+    </button>
   </div>
 
-  <!-- Stats Box -->
-  <div class="bg-[#101010]/70 border border-white/10 rounded-lg px-6 py-6">
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base text-gray-300">
-      <div class="flex justify-between">
-        <span>Network:</span>
-        <strong class="text-white">Solana</strong>
-      </div>
-      <div class="flex justify-between">
-        <span>Market Cap:</span>
-        <strong id="marketCap" class="text-white">Loading...</strong>
-      </div>
-      <div class="flex justify-between">
-        <span>Total Supply:</span>
-        <strong class="text-white">999.15M</strong>
-      </div>
-      <div class="flex justify-between">
-        <span>Circulating Supply:</span>
-        <strong class="text-white">999.15M</strong>
-      </div>
-      <div class="flex justify-between">
-        <span>Holders:</span>
-        <strong id="holders" class="text-white">2,253</strong>
-      </div>
-      <div class="flex justify-between">
-        <span>Created On:</span>
-        <strong class="text-white">pump.fun</strong>
-      </div>
-      <div class="flex justify-between">
-        <span>Status:</span>
-        <strong class="text-white">Graduated</strong>
-      </div>
+  <!-- Solana Section -->
+  <div id="solanaSection" class="chain-section">
+    <h3 class="text-2xl font-bold mb-4 text-green-400">Solana Stats</h3>
+    <p class="text-gray-300 mb-3">Contract: <span class="font-mono text-green-300">SoLaNa123456789abcDEF</span></p>
+    <p class="text-gray-300">Total Supply: <span class="font-semibold">1,000,000,000 $NOFACE</span></p>
+    <p class="text-gray-300">Holders: <span class="font-semibold">12,340</span></p>
+    <p class="text-gray-300">Liquidity: <span class="font-semibold">520 SOL</span></p>
+  </div>
 
-      <!-- Optional: Burn Address (Hidden by default) -->
-      <div class="flex justify-between hidden">
-        <span>Burn Address:</span>
-        <strong class="flex items-center gap-2 text-white">
-          11111111111111111111111111111111
-          <a href="https://solscan.io/account/11111111111111111111111111111111" target="_blank" rel="noopener noreferrer">
-            <img src="https://i.ibb.co/MkkdznDv/IMG-2153.png" alt="Burn on Solscan" class="w-4 h-4 opacity-70 hover:opacity-100 transition-opacity" />
-          </a>
-        </strong>
-      </div>
-    </div>
+  <!-- BSC Section -->
+  <div id="bscSection" class="chain-section hidden">
+    <h3 class="text-2xl font-bold mb-4 text-yellow-300">BSC Stats</h3>
+    <p class="text-gray-300 mb-3">Contract: <span class="font-mono text-yellow-200">0xBSC123456789abcDEF</span></p>
+    <p class="text-gray-300">Total Supply: <span class="font-semibold">1,000,000,000 $NOFACE</span></p>
+    <p class="text-gray-300">Holders: <span class="font-semibold">8,942</span></p>
+    <p class="text-gray-300">Liquidity: <span class="font-semibold">420 BNB</span></p>
   </div>
 </section>
 
