@@ -224,55 +224,8 @@
         <strong class="text-white">999.15M</strong>
       </div>
       <div class="flex justify-between">
-        <span>Created On:</span>
-        <strong class="text-white">pump.fun</strong>
-      </div>
-      <div class="flex justify-between">
-        <span>Status:</span>
-        <strong class="text-white">Newly launched</strong>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTRACT & STATS SECTION -->
-<section class="relative py-12 sm:py-16 md:py-20 px-6 z-10 max-w-3xl mx-auto">
-  <!-- Contract Address Box -->
-  <div class="bg-[#101010]/70 border border-white/10 rounded-lg px-6 py-4 text-center mb-10">
-    <p class="text-white text-sm sm:text-base font-semibold mb-2">
-      Contract Address (CA):
-    </p>
-    <p id="ca" class="text-sm sm:text-base text-gray-300 break-all mb-4">
-      24MXQ4PoYm5J15ESPmAmSNzAuwZHnuHmkJdQW4iBpump
-    </p>
-    <div class="flex justify-center items-center gap-3">
-      <button onclick="copyCA()" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded transition">
-        Copy CA
-      </button>
-      <a href="https://solscan.io/token/24MXQ4PoYm5J15ESPmAmSNzAuwZHnuHmkJdQW4iBpump" target="_blank" rel="noopener noreferrer">
-        <img src="https://i.ibb.co/20gb5km3/IMG-2605.png" alt="View on Solscan" class="w-6 h-6 hover:scale-110 transition-transform" />
-      </a>
-    </div>
-  </div>
-
-  <!-- Stats Box -->
-  <div class="bg-[#101010]/70 border border-white/10 rounded-lg px-6 py-6">
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm sm:text-base text-gray-300">
-      <div class="flex justify-between">
-        <span>Network:</span>
-        <strong class="text-white">Solana</strong>
-      </div>
-      <div class="flex justify-between">
-        <span>Market Cap:</span>
-        <strong id="marketCap" class="text-white">Loading...</strong>
-      </div>
-      <div class="flex justify-between">
-        <span>Total Supply:</span>
-        <strong class="text-white">999.15M</strong>
-      </div>
-      <div class="flex justify-between">
-        <span>Circulating Supply:</span>
-        <strong class="text-white">999.15M</strong>
+        <span>Holders:</span>
+        <strong id="holders" class="text-white">Loading...</strong>
       </div>
       <div class="flex justify-between">
         <span>Created On:</span>
@@ -285,62 +238,6 @@
     </div>
   </div>
 </section>
-
-<!-- ✅ Unified Live Market Cap Script -->
-<script>
-const CONTRACT = "24MXQ4PoYm5J15ESPmAmSNzAuwZHnuHmkJdQW4iBpump";
-const marketCapEl = document.getElementById("marketCap");
-const totalSupply = 999150000; // 999.15M tokens
-
-// Copy Contract Address
-function copyCA() {
-  navigator.clipboard.writeText(CONTRACT);
-  alert("✅ Contract Address copied!");
-}
-
-// Fetch Market Cap (with fallbacks)
-async function fetchMarketCap() {
-  try {
-    // ✅ 1. Try Pump.fun API
-    const pumpRes = await fetch(`https://frontend-api.pump.fun/coins/${CONTRACT}`);
-    const pumpData = await pumpRes.json();
-    if (pumpData?.usd_market_cap && pumpData.usd_market_cap > 0) {
-      marketCapEl.textContent = `$${Number(pumpData.usd_market_cap).toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
-      return;
-    }
-
-    // ✅ 2. Try DexScreener
-    const dexRes = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${CONTRACT}`);
-    const dexData = await dexRes.json();
-    if (dexData?.pairs?.length && dexData.pairs[0].priceUsd) {
-      const price = parseFloat(dexData.pairs[0].priceUsd);
-      const marketCap = price * totalSupply;
-      marketCapEl.textContent = `$${marketCap.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
-      return;
-    }
-
-    // ✅ 3. Try GMGN
-    const gmgnRes = await fetch(`https://gmgn.ai/api/v1/token/${CONTRACT}`);
-    const gmgnData = await gmgnRes.json();
-    if (gmgnData?.priceUsd) {
-      const price = parseFloat(gmgnData.priceUsd);
-      const marketCap = price * totalSupply;
-      marketCapEl.textContent = `$${marketCap.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
-      return;
-    }
-
-    // ❌ None found
-    marketCapEl.textContent = "Not available yet";
-  } catch (error) {
-    console.error("Market cap fetch error:", error);
-    marketCapEl.textContent = "Error loading";
-  }
-}
-
-// Run immediately + refresh every 30 seconds
-fetchMarketCap();
-setInterval(fetchMarketCap, 30000);
-</script>
 
 <!-- SHOWCASE (COIN VIDEO) -->
 <section id="showcase" class="relative flex flex-col items-center justify-center py-12 sm:py-16 md:py-20 z-10 bg-black/70 overflow-hidden">
@@ -539,6 +436,48 @@ function scrollGallery(direction) {
       scrollBar.style.height = scrollPercent + "%";
     });
   </script>
+
+<!-- MarketCap SCRIPT -->  
+<script>
+  const CONTRACT = "24MXQ4PoYm5J15ESPmAmSNzAuwZHnuHmkJdQW4iBpump";
+
+  // Copy CA
+  function copyCA() {
+    navigator.clipboard.writeText(CONTRACT);
+    alert("✅ Contract Address copied!");
+  }
+
+  // Fetch Live Stats
+  async function updateStats() {
+    try {
+      const res = await fetch(`https://pump.fun/api/coins/${CONTRACT}`);
+      const data = await res.json();
+
+      // Update market cap
+      const marketCap = data.marketCap || 0;
+      document.getElementById('marketCap').textContent = `$${(marketCap / 1000).toFixed(1)}K`;
+
+      // Update holders (API may include it or need separate Solscan call)
+      if (data.holders) {
+        document.getElementById('holders').textContent = data.holders.toLocaleString();
+      } else {
+        // fallback to Solscan API
+        const solscanRes = await fetch(`https://api.solscan.io/token/holders?tokenAddress=${CONTRACT}`);
+        const solscanData = await solscanRes.json();
+        document.getElementById('holders').textContent =
+          solscanData.data?.total || "Unavailable";
+      }
+    } catch (error) {
+      console.error("Failed to fetch stats:", error);
+      document.getElementById('marketCap').textContent = "Unavailable";
+      document.getElementById('holders').textContent = "Unavailable";
+    }
+  }
+
+  // Run every 60 seconds
+  updateStats();
+  setInterval(updateStats, 60000);
+</script>
 
 <!-- Audio element (hidden controls) -->
 <audio id="wickAudio" loop preload="auto">
