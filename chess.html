@@ -14,35 +14,76 @@ button, select { margin:5px; padding:10px 15px; font-size:16px; border-radius:10
 </head>
 <body>
 <h1>♟ NoFace Chess ♟</h1>
+
 <button id="connectWallet">Connect Wallet</button>
+
 <select id="skill">
   <option value="1">Beginner</option>
   <option value="2">Intermediate</option>
   <option value="3">Advanced</option>
   <option value="4">Master</option>
 </select>
+
 <select id="time">
   <option value="60">1 Minute</option>
   <option value="300">5 Minutes</option>
   <option value="600">10 Minutes</option>
 </select>
+
 <button id="start">Start Game</button>
+
 <div id="board"></div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/1.0.0/chess.min.js"></script>
 <script src="https://unpkg.com/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+<script src="https://unpkg.com/@solana/web3.js@1.67.0/lib/index.iife.min.js"></script>
+
 <script>
-let board, game;
-document.getElementById("start").onclick = function(){
+let board, game, walletPublicKey;
+
+// WebSocket connection to your live backend
+const WS_URL = "wss://noface-chess-server.onrender.com"; // <-- change if different
+const socket = new WebSocket(WS_URL);
+
+// Listen for backend messages
+socket.onmessage = (event) => {
+  const data = JSON.parse(event.data);
+  if(data.action === "matched") alert("Matched with player " + data.opponent);
+  if(data.action === "betSuccess") alert("1 NoFaceSol token bet confirmed!");
+  if(data.action === "refund") alert("Stalemate! 90% of your token refunded.");
+};
+
+// Connect wallet (Phantom)
+document.getElementById("connectWallet").onclick = async () => {
+  if (!window.solana) return alert("Install Phantom Wallet!");
+  const resp = await window.solana.connect();
+  walletPublicKey = resp.publicKey.toString();
+  alert("Wallet connected: " + walletPublicKey);
+};
+
+// Start chess game & send bet request
+document.getElementById("start").onclick = () => {
+  if(!walletPublicKey) return alert("Connect wallet first!");
+  const skill = document.getElementById("skill").value;
+  const time = parseInt(document.getElementById("time").value);
+
+  // Send start game request to backend
+  socket.send(JSON.stringify({ action: "startGame", wallet: walletPublicKey, skill, time }));
+
   game = new Chess();
   board = Chessboard('board', {
     draggable:true,
     position:'start',
     pieceTheme:(piece)=>'./img/'+piece+'.png',
     onDrop:(src,tgt)=>{
-      const move = game.move({from:src,to:tgt,promotion:'q'});
+      const move = game.move({from:src, to:tgt, promotion:'q'});
       if(move===null) return 'snapback';
       board.position(game.fen());
-      if(game.game_over()) alert('Game Over');
+      if(game.game_over()){
+        const result = game.in_stalemate() ? 'stalemate' : 'win';
+        socket.send(JSON.stringify({ action: "gameOver", wallet: walletPublicKey, result }));
+        alert("Game Over: " + result);
+      }
     }
   });
 };
